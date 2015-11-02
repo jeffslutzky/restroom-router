@@ -6,4 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-RestroomParser.parse
+
+
+RestroomParser.formatted_data.each do |data|
+    PublicPark.create(data)
+  end
