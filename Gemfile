@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'geocoder'
 gem 'pry-byebug'
+gem 'recursive-open-struct'
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

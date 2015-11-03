@@ -13,5 +13,13 @@
 #
 
 class PublicPark < ActiveRecord::Base
-  
+
+  # def self.gmaps_key
+  #   keys = YAML.load_file('application.yml')
+  #   key = keys['Google_API_Key']
+  #   response = open("https://maps.googleapis.com/maps/api/js?key=#{key}&callback=initMap")
+  #   hash = JSON.load(response)
+    
+  # end
+  # PublicPark.gmaps_key
 end
