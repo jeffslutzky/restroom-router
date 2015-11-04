@@ -1,65 +1,39 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <style type="text/css">
-      html, body { height: 100%; margin: 0; padding: 0; }
-      #header {padding: 2%;}
-      #map { height: 100%; margin-top: 5% }
-    </style>
-  </head>
-  <body>
-    <div id="header">
-      <p>This is where your content goes</p>
-    </div>
-    <div id="map"></div>
- 
-    <script type="text/javascript">
+<!-- The map -->
+<div id="map"></div>
+
+<script type="text/javascript">
 
 var map;
-function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8
-  });
-}
 
 function initMap() {
-  var myLatLng = {lat: 40.712784, lng:-74.005941 };
+  var myLatLng = {lat: 40.700023, lng:-73.856609 };
 
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
     center: myLatLng
   });
 
-  // var marker = new google.maps.Marker({
-  //   position: myLatLng,
-  //   map: map,
-  //   title: 'Hello World!'
-  // });
-
-
-
   <%counter = 0%>
   //putting erb into javascript to create multiple tags on google map for locations in our db -- public parks controller to iterate through lat lng
   <% @parks.each do |park| %>
 
-// create content for infowindow  
-<% park_viewobject = RatingViewObject.new(park) %>
-var <%= "contentString" + counter.to_s%> = "<%= park.name%> <br> <%= park.location%><p>Rating: <a href='#'><%= park.average_rating%></a></p><br>Comments:<br><%= park_viewobject.display_top_five_comments%>"
-   
-// create infowindow   
-var <%= "infowindow" + counter.to_s%> = new google.maps.InfoWindow({
-    content:<%= "contentString" + counter.to_s%>
-  });
+  // create content for infowindow  
+  <% park_viewobject = RatingViewObject.new(park) %>
+  var <%= "contentString" + counter.to_s%> = "<%= park.name%> <br> <%= park.location%><p>Rating: <a href='#'><%= park.average_rating%></a></p><br>Comments:<br><% park_viewobject.display_top_five_comments.each do |comment|%><%= comment %><br><% end %>"
+     
+  // create infowindow   
+  var <%= "infowindow" + counter.to_s%> = new google.maps.InfoWindow({
+      content:<%= "contentString" + counter.to_s%>
+    });
 
 
-  // create marker with unique var name
+    // create marker with unique var name
   var <%= "park" + counter.to_s%> = new google.maps.Marker({
     position: {lat: <%=park.latitude%>, lng: <%=park.longitude%>},   
     map: map,
     title: "<%=park.name%>"
-   
-  });
+     
+    });
 
   // create listener event for "click"
     <%= "park" + counter.to_s%>.addListener('click', function() {
@@ -67,12 +41,10 @@ var <%= "infowindow" + counter.to_s%> = new google.maps.InfoWindow({
   });
      <% counter += 1 %>
 
-  <% end %> // closing our open erb 
+  <% end %> // closing our loop 
 }
 
-    </script>
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqF6HleM6x7DGblO5v4nsY9-8jzuucCIo&callback=initMap">
-    </script>
-  </body>
-</html>
+</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqF6HleM6x7DGblO5v4nsY9-8jzuucCIo&callback=initMap">
+</script>

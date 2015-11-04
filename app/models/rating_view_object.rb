@@ -9,9 +9,9 @@ class RatingViewObject
     if !(@park.reviews.empty?)
       @park.reviews.first(5).map do |review|
         review.comment
-      end.join(" || ")
+      end
     else
-      "Be the first to rate and review this bathroom!"
+      ["Be the first to rate and review this bathroom!"]
     end
   end
 
