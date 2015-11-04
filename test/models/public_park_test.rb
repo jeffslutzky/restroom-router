@@ -5,11 +5,13 @@
 #  id                  :integer          not null, primary key
 #  name                :string
 #  location            :string
-#  open_year_round     :boolean
-#  handicap_accessible :boolean
+#  open_year_round     :string
+#  handicap_accessible :string
 #  borough             :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  latitude            :float
+#  longitude           :float
 #
 
 require 'test_helper'

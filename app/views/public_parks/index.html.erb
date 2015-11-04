@@ -33,12 +33,35 @@ function initMap() {
   //   title: 'Hello World!'
   // });
 
-  <% @parks.each do |park| %>   
-  var marker = new google.maps.Marker({
-    position: {lat: <%=park.latitude%>, lng: <%=park.longitude%>},   //putting erb into javascript to create multiple tags on google map for locations in our db -- public parks controller to iterate through lat lng
+
+
+  <%counter = 0%>
+  //putting erb into javascript to create multiple tags on google map for locations in our db -- public parks controller to iterate through lat lng
+  <% @parks.each do |park| %>
+
+// create content for infowindow  
+var <%= "contentString" + counter.to_s%> = "<%= park.name%> <br> <%= park.location%><p>Rating: <%= park.average_rating%>/10</p>"
+   
+// create infowindow   
+var <%= "infowindow" + counter.to_s%> = new google.maps.InfoWindow({
+    content:<%= "contentString" + counter.to_s%>
+  });
+
+
+  // create marker with unique var name
+  var <%= "park" + counter.to_s%> = new google.maps.Marker({
+    position: {lat: <%=park.latitude%>, lng: <%=park.longitude%>},   
     map: map,
     title: "<%=park.name%>"
+   
   });
+
+  // create listener event for "click"
+    <%= "park" + counter.to_s%>.addListener('click', function() {
+    <%= "infowindow" + counter.to_s%>.open(map, <%= "park" + counter.to_s%>);
+  });
+     <% counter += 1 %>
+
   <% end %> // closing our open erb 
 }
 

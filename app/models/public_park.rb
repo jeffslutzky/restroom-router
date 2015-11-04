@@ -5,15 +5,17 @@
 #  id                  :integer          not null, primary key
 #  name                :string
 #  location            :string
-#  open_year_round     :boolean
-#  handicap_accessible :boolean
+#  open_year_round     :string
+#  handicap_accessible :string
 #  borough             :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  latitude            :float
+#  longitude           :float
 #
 
 class PublicPark < ActiveRecord::Base
-
+  has_many :reviews
   # def self.gmaps_key
   #   keys = YAML.load_file('application.yml')
   #   key = keys['Google_API_Key']
@@ -22,4 +24,9 @@ class PublicPark < ActiveRecord::Base
     
   # end
   # PublicPark.gmaps_key
+
+  def average_rating
+    self.reviews.average(:rating).to_f
+  end
+
 end
