@@ -13,7 +13,7 @@
 
 class Review < ActiveRecord::Base
   belongs_to :public_park
-  # belongs_to :user
+  belongs_to :user
 
   # validations
   # validate rating up 10
