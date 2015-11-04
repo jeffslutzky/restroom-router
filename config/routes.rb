@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
 
   get 'signup', to: 'users#new'
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  get 'logout', to: 'sessions#destroy'
+  delete 'logout', to: 'sessions#destroy'
+
   root to: 'public_parks#index'
+  resources :sessions
   resources :users
   resources :public_parks
   # The priority is based upon order of creation: first created -> highest priority.
