@@ -40,7 +40,7 @@ function initMap() {
   <% @parks.each do |park| %>
 
 // create content for infowindow  
-var <%= "contentString" + counter.to_s%> = "<%= park.name%> <br> <%= park.location%><p>Rating: <%= park.average_rating%>/10</p>"
+var <%= "contentString" + counter.to_s%> = "<%= park.name%> <br> <%= park.location%><p>Rating: <%= park.average_rating%>/10</p><br>Comments:<br><% if !(park.reviews.empty?)%><%= park.reviews.last.comment%><%end%>"
    
 // create infowindow   
 var <%= "infowindow" + counter.to_s%> = new google.maps.InfoWindow({
