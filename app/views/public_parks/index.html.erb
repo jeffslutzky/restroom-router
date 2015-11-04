@@ -19,18 +19,18 @@ function initMap() {
 }
 
 function initMap() {
-  var myLatLng = {lat: -25.363, lng: 131.044};
+  var myLatLng = {lat: 40.712784, lng:-74.005941 };
 
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
+    zoom: 10,
     center: myLatLng
   });
 
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: 'Hello World!'
-  });
+  // var marker = new google.maps.Marker({
+  //   position: myLatLng,
+  //   map: map,
+  //   title: 'Hello World!'
+  // });
 
   <% @parks.each do |park| %>   
   var marker = new google.maps.Marker({
@@ -43,7 +43,7 @@ function initMap() {
 
     </script>
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=HIDDENKEY&callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqF6HleM6x7DGblO5v4nsY9-8jzuucCIo&callback=initMap">
     </script>
   </body>
 </html>
