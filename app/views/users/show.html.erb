@@ -1,2 +1,20 @@
-<%= render '../views/layouts/header' %>
+<% if current_user %>
+ <p> <%= link_to "Log out", logout_path %> </p>
+ <p> <%= "Welcome, #{@user.name}" %> </p>
+ <% else %>
+ <p> <%= link_to "Sign up", signup_path %> </p>
+ <p> <%= link_to "Log in", login_path %> </p>
+ <% end %>
+<br>
+
+Previous Reviews:
+ <% user_reviews = Review.where(user_id: @user.id) %>
+ <% user_reviews.each do |review| %>
+ <p><%= review.public_park.name %>:</p>
+ <p>rating: <%= review.rating %> </p>
+ <p>comments: <%= review.comment %> </p><br>
+
+
+
+ <% end %>
 
