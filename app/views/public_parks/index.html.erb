@@ -7,8 +7,9 @@
     </style>
   </head>
   <body>
-
+  
     <div id="map"></div>
+  
     <script type="text/javascript">
 
 var map;
@@ -23,7 +24,7 @@ function initMap() {
   var myLatLng = {lat: 40.712784, lng:-74.005941 };
 
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 10,
+    zoom: 12,
     center: myLatLng
   });
 
@@ -40,7 +41,8 @@ function initMap() {
   <% @parks.each do |park| %>
 
 // create content for infowindow  
-var <%= "contentString" + counter.to_s%> = "<%= park.name%> <br> <%= park.location%><p>Rating: <%= park.average_rating%>/10</p><br>Comments:<br><% if !(park.reviews.empty?)%><%= park.reviews.last.comment%><%end%>"
+<% park_viewobject = RatingViewObject.new(park) %>
+var <%= "contentString" + counter.to_s%> = "<%= park.name%> <br> <%= park.location%><p>Rating: <a href='#'><%= park.average_rating%></a></p><br>Comments:<br><%= park_viewobject.display_top_five_comments%>"
    
 // create infowindow   
 var <%= "infowindow" + counter.to_s%> = new google.maps.InfoWindow({
