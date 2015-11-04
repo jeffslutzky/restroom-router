@@ -24,10 +24,12 @@ Adapters::RestroomParser.formatted_data.each do |data|
 
   if latlng.length > 0
 
+    # get all values from geocoder results
     park_data = latlng.first.address_components.each_with_object([]) do |hash, all_values|
       all_values << hash.values
     end.flatten.uniq
 
+    # return all values the 2 arrays have in common
     nyc_check = park_data & boroughs
 
     if nyc_check.length > 0
