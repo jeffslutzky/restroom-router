@@ -41,7 +41,7 @@ function initMap() {
   
 var <%= "contentString" + counter.to_s%> = "<%= park.name%>"
    
-var infowindow = new google.maps.InfoWindow({
+var <%= "infowindow" + counter.to_s%> = new google.maps.InfoWindow({
     content:<%= "contentString" + counter.to_s%>
   });
 
@@ -55,7 +55,7 @@ var infowindow = new google.maps.InfoWindow({
   });
 
     <%= "park" + counter.to_s%>.addListener('click', function() {
-    infowindow.open(map, <%= "park" + counter.to_s%>).setPosition();
+    <%= "infowindow" + counter.to_s%>.open(map, <%= "park" + counter.to_s%>);
   });
      <% counter += 1 %>
 
