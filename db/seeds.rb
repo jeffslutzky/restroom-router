@@ -8,36 +8,40 @@
 
 PublicPark.delete_all
 
-Adapters::RestroomParser.formatted_data.each do |data|    #iterate through each park (hash)
-    sleep(0.11) #Geocoder gem only allows for 10 queries per second
-    new_park = PublicPark.new(data)  
-      name = new_park.name  
-      location = new_park.location  
-        latlng = Geocoder.search(location)  #use Geocoder gem to get geo information
-        #latlng = latlng.first['geometry']['location']  #parse Geocoder gem output to get latitude and longitude 
-        boroughs = ["Bronx County", "Kings County", "New York County", "Queens County", "Richmond County"]
-        unless latlng.count < 1
-          
-    
-          s_results = RecursiveOpenStruct.new(latlng.first.geometry['location'], :recurse_over_arrays => true)
-            
-          location_check = latlng.first.address_components.any? do |test|
-             #test.values.include?("Bronx County", "Kings County", "New York County", "Queens County", "Richmond County")
-          
-             boroughs.each do |borough|
-            test.has_value?(borough)
-          end
-           
-           end
-             if location_check
+Adapters::RestroomParser.formatted_data.each do |data|    
+#iterate through each park (hash)
+  sleep(0.11) #Geocoder gem only allows for 10 queries per second
+  new_park = PublicPark.new(data)  
+  name = new_park.name  
+  location = new_park.location 
+  #use Geocoder gem to get geo information 
+  latlng = Geocoder.search(location)  
+  
 
-            new_park.latitude = s_results.lat
-            new_park.longitude = s_results.lng
-            new_park.save
-          
-        end
-      end
+  # latlng = RecursiveOpenStruct.new(latlng.first.address_components.first)
+
+  boroughs = ["Bronx County", "Kings County", "New York County", "Queens County", "Richmond County"]
+
+  if latlng.length > 0
+
+    # get all values from geocoder results
+    park_data = latlng.first.address_components.each_with_object([]) do |hash, all_values|
+      all_values << hash.values
+    end.flatten.uniq
+
+    # return all values the 2 arrays have in common
+    nyc_check = park_data & boroughs
+
+    if nyc_check.length > 0
+      parse_location = RecursiveOpenStruct.new(latlng.first.geometry['location'], :recurse_over_arrays => true) 
+      # parse Geocoder gem output to get latitude and longitude 
+      new_park.latitude = parse_location.lat
+      new_park.longitude = parse_location.lng
+      new_park.save
+    end
   end
+end
+
   
 
 
