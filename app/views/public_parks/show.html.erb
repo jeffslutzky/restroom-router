@@ -1,29 +1,9 @@
 <h1> <%= @public_park.name %> <h1>
   <h3> <%= @public_park.location %> </h3>
   <% @public_park.reviews.each do |review| %>
-  <%= review.rating %><br>
-  <%= review.comment %> 
+  <p><%= "Rating: #{review.rating}" %></p>
+  <p><%= review.comment %></p>
   <% end %>
 
-  <% if user_signed_in? %> 
-  <%= form_for @review do |f| %>
-<% if @review.errors.any? %>
-  <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved: </h2>
 
-<ul>
-  <% @review.errors.full_messages.each do |message| %>
-  <li> <%= message %> </li> 
-  <% end %>
-</ul>
-  <% end %>
-<%= f.hidden_field :public_park_id, value: @public_park.id %>
-<%= f.label :rating %>
-<%= f.select :rating, (1..10) %> <br><br>
-
-<%= f.label :comments %> <br> <br>
-<%= f.text_area :comment %><br>
-<%= f.submit "Submit your review" %>
-
-<% end %> 
-
-<% end %> 
+<%= render './reviews/review_form' %>

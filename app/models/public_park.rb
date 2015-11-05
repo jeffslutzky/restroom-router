@@ -12,6 +12,7 @@
 #  updated_at          :datetime         not null
 #  latitude            :float
 #  longitude           :float
+#  location_type       :string
 #
 
 class PublicPark < ActiveRecord::Base

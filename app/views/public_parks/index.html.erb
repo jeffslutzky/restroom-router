@@ -22,7 +22,7 @@ function initMap() {
 
   // create content for infowindow  
   <% park_viewobject = RatingViewObject.new(park) %>
-  var <%= "contentString" + counter.to_s%> = "<%= park.name%> <br> <%= park.location%><p>Rating: <a href='#'><%= park.average_rating%></a></p><br>Comments:<br><% park_viewobject.display_top_five_comments.each do |comment|%><%= comment %><br><% end %>"
+  var <%= "contentString" + counter.to_s%> = "<a href='<%= public_park_path(park.id) %>'><%= park.name%></a> <br> <%= park.location%><p>Rating: <%= park.average_rating%></p><br>Comments:<br><% park_viewobject.display_top_five_comments.each do |comment|%><%= comment %><br><% end %>"
      
   // create infowindow   
   var <%= "infowindow" + counter.to_s%> = new google.maps.InfoWindow({
