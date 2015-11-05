@@ -7,7 +7,7 @@ class PublicParksController < ApplicationController
 
   def show
     @public_park = PublicPark.find(params[:id])
-    @review = @public_park.reviews.build
+    @review = Review.new
   end
 
   def create
