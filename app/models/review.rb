@@ -15,6 +15,10 @@ class Review < ActiveRecord::Base
   belongs_to :public_park
   belongs_to :user
 
+  validates :comment, length: {maximum: 140}
+
+  
+
   # validations
   # validate rating up 10
   # validate comment characters up to 140
