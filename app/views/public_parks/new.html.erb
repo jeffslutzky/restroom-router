@@ -1,0 +1,26 @@
+<!-- refactor as a partial later -->
+
+
+<%= form_for @location do |f| %>
+<% if @location.errors.any? %>
+  <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved: </h2>
+
+<ul>
+  <% @location.errors.full_messages.each do |message| %>
+  <li> <%= message %> </li> 
+  <% end %>
+</ul>
+  <% end %>
+<%= f.label :name %>
+<%= f.text_field :name %> <br><br>
+<%= f.label :address %>
+<%= f.text_field :location %><br><br>  <!-- if Geolocator can't find it this will be invalid -->
+<%= f.label :Type_of_Establishment %> 
+<%= f.select :location_type, ["Park", "Restaurant / Cafe", "Store / Shop", "Other"] %> <br><br>
+<%= f.label :handicap_Accessible %>
+<%= f.select :handicap_accessible, ["yes", "no"] %> <br><br>
+<%= f.label :Open_Year_Round, "Open Year-Round"%>
+<%= f.select :open_year_round, ["yes", "no"] %> <br><br>
+<%= f.submit "Submit new location" %>
+
+<% end %> 
