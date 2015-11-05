@@ -1,10 +1,5 @@
 <% if current_user %>
- <p> <%= link_to "Log out", logout_path %> </p>
- <p> <%= "Welcome, #{@user.name}" %> </p>
- <% else %>
- <p> <%= link_to "Sign up", signup_path %> </p>
- <p> <%= link_to "Log in", login_path %> </p>
- <% end %>
+ 
 <br>
 
 Previous Reviews:
@@ -13,8 +8,14 @@ Previous Reviews:
  <p><%= review.public_park.name %>:</p>
  <p>rating: <%= review.rating %> </p>
  <p>comments: <%= review.comment %> </p><br>
-
-
-
  <% end %>
+
+<%= link_to "Add a review", public_parks_path %>
+
+ 
+<% else %>
+ <p> <%= link_to "Sign up", signup_path %> </p>
+ <p> <%= link_to "Log in", login_path %> </p>
+ <% end %>
+
 
