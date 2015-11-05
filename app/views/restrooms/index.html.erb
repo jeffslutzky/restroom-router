@@ -1,0 +1,58 @@
+
+
+<!-- The map -->
+<div id="map"></div>
+
+
+<script type="text/javascript">
+
+var map;
+
+function initMap() {
+  var myLatLng = {lat: 40.700023, lng:-73.856609 };
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 12,
+    center: myLatLng
+  });
+
+  <%counter = 0%>
+  //putting erb into javascript to create multiple tags on google map for locations in our db -- public restrooms controller to iterate through lat lng
+
+var infowindow = new google.maps.InfoWindow();
+
+
+
+  <% @restrooms.each do |restroom| %>
+
+  // create content for infowindow  
+  <% restroom_viewobject = RatingViewObject.new(restroom) %>
+  var <%= "contentString" + counter.to_s%> = "<a href='<%= restroom_path(restroom.id) %>'><%= restroom.name%></a> <br> <%= restroom.location%><p>Rating: <%= restroom.average_rating%></p><br>Comments:<br><% restroom_viewobject.display_top_five_comments.each do |comment|%><%= comment %><br><% end %>"
+     
+  // create infowindow   
+
+
+    // create marker with unique var name
+  var <%= "restroom" + counter.to_s%> = new google.maps.Marker({
+    position: {lat: <%=restroom.latitude%>, lng: <%=restroom.longitude%>},   
+    map: map,
+    title: "<%=restroom.name%>"
+     
+    });
+
+  // create listener event for "click"
+    <%= "restroom" + counter.to_s%>.addListener('click', function() {
+      infowindow.close()
+    infowindow.setContent(<%= "contentString" + counter.to_s%>);
+    infowindow.open(map, <%= "restroom" + counter.to_s%>);
+  });
+     <% counter += 1 %>
+
+
+  <% end %> // closing our loop 
+}
+
+</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqF6HleM6x7DGblO5v4nsY9-8jzuucCIo&callback=initMap">
+</script>

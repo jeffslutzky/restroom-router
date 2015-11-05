@@ -1,23 +1,23 @@
-class PublicParksController < ApplicationController
+class RestroomsController < ApplicationController
 
   def index
-    @parks = PublicPark.all 
-    @hash = {lat: PublicPark.first.latitude, lng: PublicPark.first.longitude}
+    @restrooms = Restroom.all 
+    @hash = {lat: Restroom.first.latitude, lng: Restroom.first.longitude}
   end
 
   def show
-    @public_park = PublicPark.find(params[:id])
+    @restroom = Restroom.find(params[:id])
     @review = Review.new
   end
 
    def new
-    @location = PublicPark.new
+    @location = Restroom.new
   end
 
   def create
     # binding.pry
-    @location = PublicPark.find_or_initialize_by(location_params)
-    full_location = "#{params[:public_park][:location]},#{params[:public_park][:borough]}"
+    @location = Restroom.find_or_initialize_by(location_params)
+    full_location = "#{params[:restroom][:location]},#{params[:restroom][:borough]}"
     @coordinates = Geocoder.search(full_location)
     if lat_lng = get_lat_lng(@coordinates)
       @location.latitude = lat_lng.lat
@@ -35,12 +35,12 @@ class PublicParksController < ApplicationController
     if arg1.length > 0
 
       # get all values from geocoder results
-      park_data = arg1.first.address_components.each_with_object([]) do |hash, all_values|
+      restroom_data = arg1.first.address_components.each_with_object([]) do |hash, all_values|
         all_values << hash.values
       end.flatten.uniq
 
       # return all values the 2 arrays have in common
-      nyc_check = park_data & boroughs
+      nyc_check = restroom_data & boroughs
 
       if nyc_check.length > 0
         parse_location = RecursiveOpenStruct.new(arg1.first.geometry['location'], :recurse_over_arrays => true) 
@@ -52,7 +52,7 @@ class PublicParksController < ApplicationController
   private
 
   def location_params
-    params.require(:public_park).permit(:name, :handicap_accessible, :open_year_round, :location_type, :borough, :location)
+    params.require(:restroom).permit(:name, :handicap_accessible, :open_year_round, :location_type, :borough, :location)
   end
 
 

@@ -13,9 +13,6 @@ module SessionsHelper
     @current_user = nil
   end
 
-  # def remember(user)
-  #   user.remember
-  # end
 
   private
 

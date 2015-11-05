@@ -1,7 +1,7 @@
 <% if current_user %>
  <p> <%= link_to "Log out", logout_path %> </p>
  <p> <%= link_to "profile page", user_path(current_user) %> <p>
- <p> <%= link_to "Add a restroom",  new_public_park_path %> </p>
+ <p> <%= link_to "Add a restroom",  new_restroom_path %> </p>
  <p> <%= "Hi, #{current_user.name.capitalize}!" %> </p>
 <% else %>
  <p> <%= link_to "Sign up", signup_path %> </p>

@@ -15,16 +15,9 @@
 #  location_type       :string
 #
 
-class PublicPark < ActiveRecord::Base
+class Restroom < ActiveRecord::Base
   has_many :reviews
-  # def self.gmaps_key
-  #   keys = YAML.load_file('application.yml')
-  #   key = keys['Google_API_Key']
-  #   response = open("https://maps.googleapis.com/maps/api/js?key=#{key}&callback=initMap")
-  #   hash = JSON.load(response)
-    
-  # end
-  # PublicPark.gmaps_key
+
 
   def average_rating
     if !(self.reviews.empty?)
@@ -32,7 +25,7 @@ class PublicPark < ActiveRecord::Base
       avg = avg.round(1)
       "#{avg}/10"
     else
-      "Be the first to rate this bathroom!"
+      "Be the first to rate this restroom!"
     end
   end
 

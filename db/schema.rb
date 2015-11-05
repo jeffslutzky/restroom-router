@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105190822) do
+ActiveRecord::Schema.define(version: 20151105224256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "public_parks", force: :cascade do |t|
+  create_table "restrooms", force: :cascade do |t|
     t.string   "name"
     t.string   "location"
     t.string   "open_year_round"
@@ -33,9 +33,9 @@ ActiveRecord::Schema.define(version: 20151105190822) do
     t.integer  "rating"
     t.integer  "user_id"
     t.string   "comment"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "public_park_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "restroom_id"
   end
 
   create_table "users", force: :cascade do |t|

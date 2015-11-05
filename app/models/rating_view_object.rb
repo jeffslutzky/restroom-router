@@ -1,16 +1,16 @@
 class RatingViewObject
 
-  def initialize(park)
-    @park = park 
+  def initialize(restroom)
+    @restroom = restroom 
   end
 
   def display_top_five_comments
-    if !(@park.reviews.empty?)
-      @park.reviews.last(5).map do |review|
+    if !(@restroom.reviews.empty?)
+      @restroom.reviews.last(5).map do |review|
         review.comment
       end
     else
-      ["Be the first to rate and review this bathroom!"]
+      ["Be the first to review this restroom!"]
     end
   end
 

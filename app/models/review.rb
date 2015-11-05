@@ -12,7 +12,7 @@
 #
 
 class Review < ActiveRecord::Base
-  belongs_to :public_park
+  belongs_to :restroom
   belongs_to :user
 
   validates :comment, length: {maximum: 140}

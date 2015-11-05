@@ -1,6 +1,6 @@
 <% if user_signed_in? %> 
 
-<h2>Review this Loo</h2>
+<h2>Review this loo</h2>
 
 	<%= form_for @review do |f| %>
 	<% if @review.errors.any? %>
@@ -12,7 +12,7 @@
 	  <% end %>
 	</ul>
 	  <% end %>
-	<%= f.hidden_field :public_park_id, value: @public_park.id %>
+	<%= f.hidden_field :restroom_id, value: @restroom.id %>
 	<%= f.label :rating %>
 	<%= f.select :rating, (1..10) %> <br><br>
 

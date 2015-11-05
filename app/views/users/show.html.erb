@@ -4,13 +4,13 @@
 
 Previous Reviews:
  <% @user.reviews.each do |review| %>
- <p><%= review.public_park.name %>:</p>
+ <p><%= review.restroom.name %>:</p>
  <p>rating: <%= review.rating %> </p>
  <p>comments: <%= review.comment %> </p><br>
  <% end %>
 <br><br>
 <%= link_to "View map", root_path %> <br>
-<%= link_to "Add a restroom",  new_public_park_path %>
+<%= link_to "Add a restroom",  new_restroom_path %>
 
  
 <% else %>

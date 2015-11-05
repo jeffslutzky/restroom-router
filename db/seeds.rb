@@ -6,12 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-PublicPark.delete_all
+Restroom.delete_all
 
 Adapters::RestroomParser.formatted_data.each do |data|    
 #iterate through each park (hash)
   sleep(0.11) #Geocoder gem only allows for 10 queries per second
-  new_park = PublicPark.new(data)  
+  new_park = Restroom.new(data)  
   name = new_park.name  
   location = new_park.location 
   #use Geocoder gem to get geo information 

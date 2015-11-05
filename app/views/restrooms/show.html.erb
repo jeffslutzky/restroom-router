@@ -1,6 +1,6 @@
-<h1> <%= @public_park.name %> <h1>
-  <h3> <%= @public_park.location %> </h3>
-  <% @public_park.reviews.each do |review| %>
+<h1> <%= @restroom.name %> <h1>
+  <h3> <%= @restroom.location %> </h3>
+  <% @restroom.reviews.each do |review| %>
   <p><%= "Rating: #{review.rating}" %></p>
   <p><%= review.comment %></p>
   <% end %>
