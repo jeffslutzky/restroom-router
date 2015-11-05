@@ -1,5 +1,6 @@
 <!-- refactor as a partial later -->
 
+<% if user_signed_in? %>
 
 <%= form_for @location do |f| %>
 <% if @location.errors.any? %>
@@ -15,12 +16,19 @@
 <%= f.text_field :name %> <br><br>
 <%= f.label :address %>
 <%= f.text_field :location %><br><br>  <!-- if Geolocator can't find it this will be invalid -->
+<%= f.label :borough %>
+<%= f.select :borough, {"Manhattan" => "New York County", "Bronx" => "Bronx County", "Brooklyn" => "Kings County", "Queens" => "Queens County", "Staten Island" => "Richmond County"} %> <br><br>
 <%= f.label :Type_of_Establishment %> 
 <%= f.select :location_type, ["Park", "Restaurant / Cafe", "Store / Shop", "Other"] %> <br><br>
 <%= f.label :handicap_Accessible %>
 <%= f.select :handicap_accessible, ["yes", "no"] %> <br><br>
-<%= f.label :Open_Year_Round, "Open Year-Round"%>
+<%= f.label :Open_Year_Round, "Open year-round"%>
 <%= f.select :open_year_round, ["yes", "no"] %> <br><br>
 <%= f.submit "Submit new location" %>
 
 <% end %> 
+<% else %>
+Please log in to add a review
+
+
+<% end %>

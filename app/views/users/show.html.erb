@@ -3,14 +3,14 @@
 <br>
 
 Previous Reviews:
- <% user_reviews = Review.where(user_id: @user.id) %>
- <% user_reviews.each do |review| %>
+ <% @user.reviews.each do |review| %>
  <p><%= review.public_park.name %>:</p>
  <p>rating: <%= review.rating %> </p>
  <p>comments: <%= review.comment %> </p><br>
  <% end %>
-
-<%= link_to "Add a review", public_parks_path %>
+<br><br>
+<%= link_to "View map", root_path %> <br>
+<%= link_to "Add a restroom",  new_public_park_path %>
 
  
 <% else %>
