@@ -15,6 +15,7 @@ class PublicParksController < ApplicationController
   end
 
   def create
+    # binding.pry
     @location = PublicPark.find_or_initialize_by(location_params)
     full_location = "#{params[:public_park][:location]},#{params[:public_park][:borough]}"
     @coordinates = Geocoder.search(full_location)
@@ -51,7 +52,7 @@ class PublicParksController < ApplicationController
   private
 
   def location_params
-    params.require(:public_park).permit(:name, :handicap_accessible, :open_year_round, :location_type, :borough)
+    params.require(:public_park).permit(:name, :handicap_accessible, :open_year_round, :location_type, :borough, :location)
   end
 
 
