@@ -16,9 +16,13 @@ class RestroomsController < ApplicationController
   end
 
   def create
-    # has to change this--couldn't find by params that include reviews_attributes
-    # @location = Restroom.find_or_initialize_by(location_params)
-    @location = Restroom.new(location_params)
+    find_params = params["restroom"].reject {|k, v| k == "reviews_attributes"} 
+    @location = Restroom.find_by(find_params)
+    if @location
+      @location.update(location_params)
+    else 
+      @location = Restroom.new(location_params)
+    end
     full_location = "#{params[:restroom][:location]},#{params[:restroom][:borough]}"
     @coordinates = Geocoder.search(full_location)
     if lat_lng = get_lat_lng(@coordinates)
@@ -33,7 +37,6 @@ class RestroomsController < ApplicationController
 
   def get_lat_lng(arg1)
     boroughs = ["Bronx County", "Kings County", "New York County", "Queens County", "Richmond County"]
-    # boroughs = ["New York County"]
 
     if arg1.length > 0
 
