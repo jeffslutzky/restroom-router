@@ -9,10 +9,10 @@
 var map;
 
 function initMap() {
-  var myLatLng = {lat: 40.700023, lng:-73.856609 };
+  var myLatLng = {lat: <%= @latitude%>, lng:<%= @longitude %> };
 
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
+    zoom: <%= @zoom_value %>,
     center: myLatLng
   });
 
@@ -28,16 +28,17 @@ var infowindow = new google.maps.InfoWindow();
   // create content for infowindow  
   <% restroom_viewobject = RatingViewObject.new(restroom) %>
   var <%= "contentString" + counter.to_s%> = "<a href='<%= restroom_path(restroom.id) %>'><%= restroom.name%></a> <br> <%= restroom.location%><p>Rating: <%= restroom.average_rating%></p><br>Comments:<br><% restroom_viewobject.display_top_five_comments.each do |comment|%><%= comment %><br><% end %>"
-     
-  // create infowindow   
+
+  // create infowindow
 
 
     // create marker with unique var name
   var <%= "restroom" + counter.to_s%> = new google.maps.Marker({
-    position: {lat: <%=restroom.latitude%>, lng: <%=restroom.longitude%>},   
+    position: {lat: <%=restroom.latitude%>, lng: <%=restroom.longitude%>},
     map: map,
     title: "<%=restroom.name%>"
-     
+
+
     });
 
   // create listener event for "click"
@@ -49,7 +50,7 @@ var infowindow = new google.maps.InfoWindow();
      <% counter += 1 %>
 
 
-  <% end %> // closing our loop 
+  <% end %> // closing our loop
 }
 
 </script>

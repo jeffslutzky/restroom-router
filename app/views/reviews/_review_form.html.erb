@@ -1,4 +1,4 @@
-<% if user_signed_in? %> 
+<% if user_signed_in? %>
 
 <h2>Review this loo</h2>
 
@@ -8,7 +8,7 @@
 
 	<ul>
 	  <% @review.errors.full_messages.each do |message| %>
-	  <li> <%= message %> </li> 
+	  <li> <%= message %> </li>
 	  <% end %>
 	</ul>
 	  <% end %>
@@ -17,9 +17,9 @@
 	<%= f.select :rating, (1..10) %> <br><br>
 
 	<%= f.label :comments %> <br> <br>
-	<%= f.text_area :comment %><br>
+	<%= f.text_area :comment, class: "form-control" %><br>
 	<%= f.submit "Submit your review" %>
 
-	<% end %> 
+	<% end %>
 
-<% end %> 
+<% end %>
