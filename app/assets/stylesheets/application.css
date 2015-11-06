@@ -12,6 +12,4 @@
  *
  *
  *= require_self
- *= require bootstrap
- *= require spacelab/loader.css.less
- *= require sign_in 
+ 

@@ -17,11 +17,17 @@ class RestroomsController < ApplicationController
 
    def new
     @location = Restroom.new
+    @review = @location.reviews.build
   end
 
   def create
-    # binding.pry
-    @location = Restroom.find_or_initialize_by(location_params)
+    find_params = params["restroom"].reject {|k, v| k == "reviews_attributes"} 
+    @location = Restroom.find_by(find_params)
+    if @location
+      @location.update(location_params)
+    else 
+      @location = Restroom.new(location_params)
+    end
     full_location = "#{params[:restroom][:location]},#{params[:restroom][:borough]}"
     @coordinates = Geocoder.search(full_location)
     if lat_lng = get_lat_lng(@coordinates)
@@ -57,7 +63,7 @@ class RestroomsController < ApplicationController
   private
 
   def location_params
-    params.require(:restroom).permit(:name, :handicap_accessible, :open_year_round, :location_type, :borough, :location)
+    params.require(:restroom).permit(:name, :handicap_accessible, :open_year_round, :location_type, :borough, :location, :reviews_attributes => [:rating, :comment, :user_id])
   end
 
 

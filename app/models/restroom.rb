@@ -16,8 +16,9 @@
 #
 
 class Restroom < ActiveRecord::Base
+  attr_accessor :reviews_attributes
   has_many :reviews
-
+  accepts_nested_attributes_for :reviews
 
   def average_rating
     if !(self.reviews.empty?)
@@ -29,4 +30,17 @@ class Restroom < ActiveRecord::Base
     end
   end
 
+  def reviews_attributes=(attributes)
+    # attributes = {"0" => {user_id: "2", rating: "4", comment: "something"}}
+    review = self.reviews.build
+    values_hash = attributes.values.first
+    rating = values_hash[:rating]
+    review.rating = rating.to_f
+    review.comment = values_hash[:comment]
+    id = values_hash[:user_id]
+    review.user_id = id.to_f
+  end
+
 end
+
+
