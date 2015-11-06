@@ -1,8 +1,12 @@
 class PublicParksController < ApplicationController
 
   def index
-    @parks = PublicPark.all 
+    @parks = PublicPark.all
     @hash = {lat: PublicPark.first.latitude, lng: PublicPark.first.longitude}
+    #For centering the map in new york
+    @latitude = 40.700023
+    @longitude = -73.856609
+    @zoom_value = 12
   end
 
   def show
@@ -23,7 +27,7 @@ class PublicParksController < ApplicationController
       @location.longitude = lat_lng.lng
       @location.save
       redirect_to root_path
-    else 
+    else
       render :new
     end
   end
@@ -42,8 +46,8 @@ class PublicParksController < ApplicationController
       nyc_check = park_data & boroughs
 
       if nyc_check.length > 0
-        parse_location = RecursiveOpenStruct.new(arg1.first.geometry['location'], :recurse_over_arrays => true) 
-        # parse Geocoder gem output to get latitude and longitude 
+        parse_location = RecursiveOpenStruct.new(arg1.first.geometry['location'], :recurse_over_arrays => true)
+        # parse Geocoder gem output to get latitude and longitude
       end
     end
   end
