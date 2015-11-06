@@ -17,7 +17,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.user_id = session[:user_id]
     if @review.save
-      redirect_to root_path
+      redirect_to "/restrooms/#{@review.restroom_id}"
     else
       # flash[:notice] = "and nobody is that interested in your business..."
       render :new

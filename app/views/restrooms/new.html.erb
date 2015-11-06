@@ -13,9 +13,9 @@
         <% end %>
       </ul>
    <% end %>
-    <%= f.label :name %>
+    <%= f.label :name, "Restroom Name" %>
     <%= f.text_field :name, class: "form-control" %> <br><br>
-    <%= f.label :address %>
+    <%= f.label :address, "Restroom Address" %>
     <%= f.text_field :location, class: "form-control" %><br><br>  <!-- if Geolocator can't find it this will be invalid -->
     <%= f.label :borough %>
     <%= f.select :borough, {"Manhattan" => "New York County", "Bronx" => "Bronx County", "Brooklyn" => "Kings County", "Queens" => "Queens County", "Staten Island" => "Richmond County"}, class: "form-control" %> <br><br>

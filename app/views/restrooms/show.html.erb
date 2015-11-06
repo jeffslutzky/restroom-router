@@ -1,9 +1,16 @@
+<div class="container">
 <h1> <%= @restroom.name %> <h1>
-  <h3> <%= @restroom.location %> </h3>
+  <h3>Location: <%= @restroom.location %> </h3>
+  <br>
+  <h4>Reviews</h4>
   <% @restroom.reviews.each do |review| %>
+  <br>
+  
+  <p><a href="/users/<%= review.user_id %> "><%= "@#{review.user.name}" %></a> reports... </p>
   <p><%= "Rating: #{review.rating}" %></p>
   <p><%= review.comment %></p>
   <% end %>
 
 
 <%= render './reviews/review_form' %>
+</div>
