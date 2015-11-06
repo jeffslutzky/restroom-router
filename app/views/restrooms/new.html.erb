@@ -24,6 +24,16 @@
 <%= f.select :handicap_accessible, ["yes", "no"] %> <br><br>
 <%= f.label :Open_Year_Round, "Open year-round"%>
 <%= f.select :open_year_round, ["yes", "no"] %> <br><br>
+
+<!--nested form -->
+<%= f.fields_for :reviews do |r| %>
+  <%= r.hidden_field :user_id, value: current_user.id %>
+  <%= r.label :rating %><br />
+  <%= r.select :rating, (1..10) %><br />
+  <%= r.label :comment %>
+  <%= r.text_area :comment %>
+<% end %>
+<!-- nested form-->
 <%= f.submit "Submit new location" %>
 
 <% end %> 
