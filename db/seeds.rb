@@ -19,7 +19,6 @@ Adapters::RestroomParser.formatted_data.each do |data|
   
 
   # latlng = RecursiveOpenStruct.new(latlng.first.address_components.first)
-  # need to move this into a method -- reusing to allow users to create new locations 
   boroughs = ["Bronx County", "Kings County", "New York County", "Queens County", "Richmond County"]
 
   if latlng.length > 0

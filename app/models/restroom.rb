@@ -31,7 +31,6 @@ class Restroom < ActiveRecord::Base
   end
 
   def reviews_attributes=(attributes)
-    # attributes = {"0" => {user_id: "2", rating: "4", comment: "something"}}
     review = self.reviews.build
     values_hash = attributes.values.first
     rating = values_hash[:rating]

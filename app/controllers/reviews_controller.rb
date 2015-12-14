@@ -19,7 +19,6 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to "/restrooms/#{@review.restroom_id}"
     else
-      # flash[:notice] = "and nobody is that interested in your business..."
       render :new
     end
   end

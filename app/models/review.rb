@@ -17,18 +17,4 @@ class Review < ActiveRecord::Base
 
   validates :comment, length: {maximum: 140}
 
-  
-
-  # validations
-  # validate rating up 10
-  # validate comment characters up to 140
-
-
-
-  # instance methods
-
-
-
-
-
 end
